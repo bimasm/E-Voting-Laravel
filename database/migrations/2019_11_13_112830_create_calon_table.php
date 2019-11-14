@@ -16,7 +16,9 @@ class CreateCalonTable extends Migration
         Schema::create('calon', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_jurusan')->unsigned();
-            $table->foreign('id_jurusan')->references('id')->on('jurusan');
+            $table->foreign('id_jurusan')->references('id')->on('jurusan')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
             $table->string('nama_ketua');
             $table->string('nama_wakil');
             $table->string('deskripsi');

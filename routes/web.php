@@ -13,12 +13,14 @@
 
 Route::get('/', function () {
     return view('login');
-});
+})->middleware('guest');
 
 // hanya untuk tamu yg belum auth
 Route::get('/login', 'LoginController@getLogin')->middleware('guest');
 Route::post('/login', 'LoginController@postLogin');
-Route::get('/logout', 'LoginController@logout');;
+Route::post('/loginmhs', 'LoginController@postLoginMhs');
+Route::get('/logout', 'LoginController@logout');
+Route::get('/signout', 'LoginController@signout');
 
 Route::get('/admin/dashboard', function() {
   return view('admin.home');
@@ -28,7 +30,7 @@ Route::get('/panitia/dashboard', function() {
   return view('panitia.home');
 })->middleware('auth:panitia');
 
-Route::get('/timses/dashboard', function() {
-  return view('timses.home');
-})->middleware('auth:timses');
+Route::get('/dashboard', function() {
+  return view('home');
+})->middleware('auth:mahasiswa');
 

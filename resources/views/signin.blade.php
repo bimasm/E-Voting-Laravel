@@ -29,7 +29,7 @@
     <![endif]-->
     
   </head>
-  <body class="signin-page">
+  <body style="background-image: url('{{asset('images/mountains5.png')}}');background-size: cover;">
     <div class="loader-bg"></div>
     <div class="loader">
       <div class="preloader-wrapper big active">
@@ -76,14 +76,14 @@
 <div class="valign">
 <div class="row">
 <div class="col s12 m6 l4 offset-l4 offset-m3">
-<div class="card white darken-1">
+<div class="card blue-grey darken-4">
 <div class="card-content ">
-  <span class="card-title">Sign In</span>
+  <span class="card-title" style="color: #ffff;">Sign In</span>
   <div class="row">
-    <form class="col s12" method="post" action="/loginmhs">
+    <form class="col s12" method="post" action="/login">
       @csrf
       <div class="input-field col s12">
-        <input id="email" type="text" class="form-control @error('username') is-invalid @enderror" name="nim" value="{{ old('username') }}" required autocomplete="username" autofocus>
+        <input id="email" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
         @error('email')
         <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>

@@ -31,6 +31,15 @@ return [
             'driver' => 'token',
             'provider' => 'panitia',
         ],
+        'mahasiswa' => [
+          'driver' => 'session',
+          'provider' => 'mahasiswa',
+        ],
+        'mahasiswa-api' => [
+            'driver' => 'token',
+            'provider' => 'mahasiswa',
+        ],
+        
     ],
     //  Providers
     'providers' => [
@@ -42,6 +51,11 @@ return [
           'driver' => 'eloquent',
           'model' => App\Admin::class,
         ],
+        'mahasiswa' => [
+          'driver' => 'eloquent',
+          'model' => App\Mahasiswa::class,
+        ],
+        
     ],
     // Password
     'passwords' => [

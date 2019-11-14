@@ -16,7 +16,9 @@ class CreatePanitiaTable extends Migration
         Schema::create('panitia', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_jurusan')->unsigned();
-            $table->foreign('id_jurusan')->references('id')->on('jurusan');
+            $table->foreign('id_jurusan')->references('id')->on('jurusan')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
             $table->string('username',191)->unique();
             $table->string('password');
             $table->string('status');

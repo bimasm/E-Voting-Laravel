@@ -15,9 +15,12 @@ class RedirectIfAuthenticated
   public function handle($request, Closure $next, $guard = null)
   {
     if (Auth::guard('admin')->check()) {
-      return redirect('/admin');
+      return redirect('/admin/dashboard');
     } else if (Auth::guard('panitia')->check()) {
-      return redirect('/panitia');
+      return redirect('/panitia/dashboard');
+      
+    } else if (Auth::guard('mahasiswa')->check()) {
+      return redirect('/dashboard');
       
     }
     return $next($request);
