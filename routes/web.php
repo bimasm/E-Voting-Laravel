@@ -19,12 +19,13 @@ Route::get('/', function () {
 Route::get('/login', 'LoginController@getLogin')->middleware('guest');
 Route::post('/login', 'LoginController@postLogin');
 Route::post('/loginmhs', 'LoginController@postLoginMhs');
-Route::get('/logout', 'LoginController@logout');
-Route::get('/signout', 'LoginController@signout');
+Route::get('/logout', 'LoginController@logout')->name('logout');
+Route::get('/signout', 'LoginController@signout')->name('signout');
 
-Route::get('/admin/dashboard', function() {
-  return view('admin.home');
-})->middleware('auth:admin');
+
+Route::prefix('admin')->group(function () {
+	Route::get('dashboard', 'AdminController@index')->middleware('auth:admin');
+});
 
 Route::get('/panitia/dashboard', function() {
   return view('panitia.home');

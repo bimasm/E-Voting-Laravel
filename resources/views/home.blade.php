@@ -3,7 +3,7 @@
     <head>
         
         <!-- Title -->
-        <title>E-Voting</title>
+        <title>{{ config('app.name', 'Dashboard') }}</title>
         
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         <meta charset="UTF-8">
@@ -77,7 +77,7 @@
                             </a>
                         </section>
                         <div class="header-title col s3">      
-                            <span class="chapter-title">Alpha</span>
+                            <span class="chapter-title">{{ config('app.name', 'Dashboard') }} Dashboard</span>
                         </div>                       
                     </div>
                 </nav>
@@ -86,7 +86,7 @@
                 <div class="side-nav-wrapper">
                     <div class="sidebar-profile">
                         <div class="sidebar-profile-image">
-                            <img src="assets/images/profile-image.png" class="circle" alt="">
+                            <img src="{{asset('images/profile-image.png')}}" class="circle" alt="">
                         </div>
                         <div class="sidebar-profile-info">
                             
@@ -100,7 +100,7 @@
                             
                             <!-- <li class="divider"></li> -->
                             <li class="no-padding">
-                                <a class="waves-effect waves-grey"><i class="material-icons">exit_to_app</i>Sign Out</a>
+                                <a href="{{route('logout')}}" class="waves-effect waves-grey"><i class="material-icons">exit_to_app</i>Sign Out</a>
                             </li>
                         </ul>
                     </div>

@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -189,7 +189,7 @@ return [
     */
 
     'aliases' => [
-
+        'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
@@ -225,6 +225,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        
+
 
     ],
 
