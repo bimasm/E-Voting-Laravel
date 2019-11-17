@@ -13,4 +13,12 @@ class AdminController extends Controller
     	
         return view('admin.home');
     }
+    public function inputjurusan()
+    {
+        return view('admin.inputjurusan');
+    }
+    public function inputpanita()
+    {
+        return view('admin.inputpanita');
+    }
 }

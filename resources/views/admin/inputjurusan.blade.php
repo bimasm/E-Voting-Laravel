@@ -3,7 +3,7 @@
     <head>
         
         <!-- Title -->
-        <title>{{ config('app.name', 'Dashboard') }}</title>
+        <title>Admin Dashboard</title>
         
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         <meta charset="UTF-8">
@@ -12,11 +12,12 @@
         <meta name="author" content="Steelcoders" />
         
         <!-- Styles -->
+        
         <link type="text/css" rel="stylesheet" href="{{asset('plugins/materialize/css/materialize.min.css')}}"/>
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="{{asset('plugins/material-preloader/css/materialPreloader.min.css')}}" rel="stylesheet">        
 
-        	
+            
         <!-- Theme Styles -->
         <link href="{{asset('css/alpha.min.css')}}" rel="stylesheet" type="text/css"/>
         <link href="{{asset('css/custom.css')}}" rel="stylesheet" type="text/css"/>
@@ -77,70 +78,48 @@
                             </a>
                         </section>
                         <div class="header-title col s3">      
-                            <span class="chapter-title">{{ config('app.name', 'Dashboard') }} Dashboard</span>
+                            <span class="chapter-title">{{ config('app.name', 'Dashboard') }} Admin Dashboard</span>
                         </div>                       
                     </div>
                 </nav>
             </header>
-            <aside id="slide-out" class="side-nav white fixed">
-                <div class="side-nav-wrapper">
-                    <div class="sidebar-profile">
-                        <div class="sidebar-profile-image">
-                            <img src="{{asset('images/profile-image.png')}}" class="circle" alt="">
-                        </div>
-                        <div class="sidebar-profile-info">
-                            
-                                <p>{{ Auth::guard('mahasiswa')->user()->nim }}</p>
-                                
-                            
-                        </div>
-                    </div>
-                    <div class="sidebar-menu collapsible collapsible-accordion">
-                        <ul>
-                            
-                            <!-- <li class="divider"></li> -->
-                            <li class="no-padding">
-                                <a href="{{route('logout')}}" class="waves-effect waves-grey"><i class="material-icons">exit_to_app</i>Sign Out</a>
-                            </li>
-                        </ul>
-                    </div>
-                
-                <div class="footer">
-                    <p class="copyright">Steelcoders ©</p>
-                    <a href="#!">Privacy</a> &amp; <a href="#!">Terms</a>
-                </div>
-                </div>
-            </aside>
+            @extends('admin.menus')
             <main class="mn-inner">
                 <div class="row">
-                <div class="col s6">
-                    <div class="card large">
-                            <div class="card-image">
-                                <img src="{{asset('images/paslon1.jpg')}}" alt="">
-                                <span class="card-title">nama ketua & nama wakil</span>
-                            </div>
+                    <div class="col s6">
+                        <div class="card">
                             <div class="card-content">
-                                <p>slogan tim suksesnya cok</p>
-                            </div>
-                            <div class="card-action">
-                                <button style="width: 100%;" type="submit" onclick="pilih()" class="waves-effect waves-light btn blue m-b-xs sweetalert-cancel">Pilih</button>
+                                <span class="card-title">Tambah Data Jurusan</span>
+                                <div class="row">
+                                    <form action="{{route('input.jurusan')}}" method="post" class="col s12" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input id="nama" name="nama" type="text" >
+                                                <label for="name" class="">Nama Jurusan</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <div class="file-field input-field">
+                                                <div class="btn teal lighten-1">
+                                                    <span>File</span>
+                                                    <input type="file" name="fotohimpunan">
+                                                </div>
+                                                <div class="file-path-wrapper">
+                                                    <input class="file-path validate" type="text">
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <button type="submit" class="waves-effect waves-light btn">tambah</button>
+                                        
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                </div>
-                <div class="col s6">
-                    <div class="card large">
-                            <div class="card-image">
-                                <img src="{{asset('images/paslon2.jpg')}}" alt="">
-                                <span class="card-title">nama ketua & nama wakil</span>
-                            </div>
-                            <div class="card-content">
-                                <p>slogan tim suksesnya cok</p>
-                            </div>
-                            <div class="card-action">
-                                <button style="width: 100%;" type="submit" onclick="pilih()" class="waves-effect waves-light btn blue m-b-xs sweetalert-cancel">Pilih</button>
-                            </div>
-                        </div>
-                </div>
+                    </div>
                 </div>
             </main>
             
@@ -155,28 +134,39 @@
         <script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}"></script>
         <script src="{{asset('js/alpha.min.js')}}"></script>
         <script src="{{asset('js/pages/miscellaneous-sweetalert.js')}}"></script>
+
+        
+        <script src="{{asset('plugins/chart.js/chart.min.js')}}"></script>
+        <script src="{{asset('plugins/d3/d3.min.js')}}"></script>
+        <script src="{{asset('plugins/nvd3/nv.d3.min.js')}}"></script>
+        <script src="{{asset('plugins/flot/jquery.flot.min.js')}}"></script>
+        <script src="{{asset('plugins/flot/jquery.flot.time.min.js')}}"></script>
+        <script src="{{asset('plugins/flot/jquery.flot.symbol.min.js')}}"></script>
+        <script src="{{asset('plugins/flot/jquery.flot.resize.min.js')}}"></script>
+        <script src="{{asset('plugins/flot/jquery.flot.tooltip.min.js')}}"></script>
+        <script src="{{asset('plugins/flot/jquery.flot.pie.min.js')}}"></script>
+        <script src="{{asset('plugins/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
+        
+        
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
         <script>
-            function pilih(){
-                swal({   
-                        title: "Are you sure?",
-                        text: "You will not be able to select again!",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#8cd4f5",
-                        confirmButtonText: "Yes, select it!",
-                        cancelButtonColor: "#DD6B55",
-                        cancelButtonText: "No, cancel",
-                        closeOnConfirm: false,
-                        closeOnCancel: false 
-                        }, function(isConfirm){
-                        if (isConfirm) {
-                            swal("Selected!", "Your vote is recorded.", "success");
-                            window.setTimeout(function(){ window.location = "/logout"; },4000);
-                        } else {
-                            swal("Cancelled", "Your vote has been cancelled", "error");
-                        }
-                    })
-            }
-        </script>
+new Chart(document.getElementById("presentase"), {
+    type: 'pie',
+    data: {
+      labels: ["Pasangan Calon 01", "Pasangan Calon 02", "Belum Memilih"],
+      datasets: [{
+        label: "pemilih",
+        backgroundColor: ["#3e95cd", "#8e5ea2", "#c45850"],
+        data: [2478,5267,433]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Hasil Pemilihan Sementara'
+      }
+    }
+});
+</script>
     </body>
 </html>

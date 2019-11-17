@@ -20,6 +20,7 @@ class CreatePanitiaTable extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
             $table->string('username',191)->unique();
+            $table->string('nama');
             $table->string('password');
             $table->string('status');
             $table->timestamps();

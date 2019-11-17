@@ -24,7 +24,18 @@ Route::get('/signout', 'LoginController@signout')->name('signout');
 
 
 Route::prefix('admin')->group(function () {
-	Route::get('dashboard', 'AdminController@index')->middleware('auth:admin');
+	Route::get('dashboard', 'AdminController@index')->name('admin.dashboard')
+	->middleware('auth:admin');
+	Route::get('input/jurusan', 'AdminController@inputjurusan')->name('in.jurusan')
+	->middleware('auth:admin');
+	Route::get('input/panitia', 'AdminController@inputpanita')->name('in.panitia')
+	->middleware('auth:admin');
+
+
+	//back end
+	Route::post('inputjurusan', 'AdminActionsController@addjurusan')->name('input.jurusan')
+	->middleware('auth:admin');
+
 });
 
 Route::get('/panitia/dashboard', function() {

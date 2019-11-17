@@ -51,6 +51,10 @@ return [
           'driver' => 'eloquent',
           'model' => App\Admin::class,
         ],
+        'users' => [
+          'driver' => 'eloquent',
+          'model' => App\User::class,
+        ],
         'mahasiswa' => [
           'driver' => 'eloquent',
           'model' => App\Mahasiswa::class,
