@@ -35,6 +35,8 @@ Route::prefix('admin')->group(function () {
 	//back end
 	Route::post('inputjurusan', 'AdminActionsController@addjurusan')->name('input.jurusan')
 	->middleware('auth:admin');
+	Route::post('inputpanitia', 'AdminActionsController@addpanitia')->name('input.panitia')
+	->middleware('auth:admin');
 
 });
 

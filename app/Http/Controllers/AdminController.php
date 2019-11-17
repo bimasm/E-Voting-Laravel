@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Jurusan;
 
 
 
@@ -19,6 +20,7 @@ class AdminController extends Controller
     }
     public function inputpanita()
     {
-        return view('admin.inputpanita');
+        $jurusan=Jurusan::where('status','disable')->get();
+        return view('admin.inputpanita',compact('jurusan'));
     }
 }
