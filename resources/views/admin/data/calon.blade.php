@@ -91,7 +91,7 @@
                     <div class="col s12 m12 l12">
                         <div class="card">
                             <div class="card-content">
-                                <span class="card-title">Data Jurusan</span>
+                                <span class="card-title">Data Calon</span>
                                 
                                 
                                 <table id="example" class="display" style="width:100%">
@@ -117,7 +117,10 @@
                 <td>{{$dt->nama_wakil}}</td>
                 <td>{{\App\Jurusan::where('id', $dt->id_jurusan)->value('nama_jurusan') }}</td>
                 <td>{{$dt->status}}</td>
-                <td>button</td>
+                <td>
+                    <a class="modal-trigger waves-effect waves-light btn blue m-b-xs" href="#modal1"><i class="material-icons">mode_edit</i></a>
+                    <a class="modal-trigger waves-effect waves-light btn red m-b-xs" href="#"><i class="material-icons">delete</i></a>
+                </td>
             </tr>
             @endforeach
         </tbody>

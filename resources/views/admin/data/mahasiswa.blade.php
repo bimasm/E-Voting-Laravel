@@ -91,7 +91,7 @@
                     <div class="col s12 m12 l12">
                         <div class="card">
                             <div class="card-content">
-                                <span class="card-title">Data Jurusan</span>
+                                <span class="card-title">Data Mahasiswa</span>
                                 
                                 
                                 <table id="example" class="display" style="width:100%">
@@ -119,7 +119,10 @@
                 <td>{{\App\Panitia::where('id', $dt->id_panitia)->value('username') }}</td>
                 <td>{{$dt->statuspilih}}</td>
                 <td>{{$dt->status}}</td>
-                <td>button</td>
+                <td>
+                    <a class="modal-trigger waves-effect waves-light btn blue m-b-xs" href="#modal1"><i class="material-icons">mode_edit</i></a>
+                    <a class="modal-trigger waves-effect waves-light btn red m-b-xs" href="#"><i class="material-icons">delete</i></a>
+                </td>
             </tr>
             @endforeach
         </tbody>

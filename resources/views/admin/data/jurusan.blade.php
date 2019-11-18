@@ -117,7 +117,10 @@
                 <td>{{$dt->status}}</td>
                 <td>{{$dt->created_at}}</td>
                 <td>{{$dt->updated_at}}</td>
-                <td>button</td>
+                <td>
+                    <a class="modal-trigger waves-effect waves-light btn blue m-b-xs" href="#modal1"><i class="material-icons">mode_edit</i></a>
+                    <a class="modal-trigger waves-effect waves-light btn red m-b-xs" href="#"><i class="material-icons">delete</i></a>
+                </td>
             </tr>
             @endforeach
         </tbody>
@@ -163,5 +166,14 @@ $(document).ready(function() {
     $('#example').DataTable();
 } );
 </script>
+<div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>Modal Header</h4>
+        <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+    </div>
+</div>
     </body>
 </html>
