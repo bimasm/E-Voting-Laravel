@@ -29,14 +29,14 @@
         </div>
         <ul class="sidebar-menu collapsible collapsible-accordion" data-collapsible="accordion">
             <li class="no-padding {{Request::routeis('admin.dashboard')?'active':''}}"><a class="waves-effect waves-grey" href="{{route('admin.dashboard')}}"><i class="material-icons">settings_input_svideo</i>Dashboard</a></li>
-            <li class="no-padding">
-                <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">apps</i>Data<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+            <li class="no-padding {{Request::routeis('data.jurusan','data.panitia','data.calon','data.mahasiswa')?'active':''}}">
+                <a class="collapsible-header waves-effect waves-grey {{Request::routeis('data.jurusan','data.panitia','data.calon','data.mahasiswa')?'active':''}}"><i class="material-icons">apps</i>Data<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                 <div class="collapsible-body">
                     <ul>
-                        <li><a href="#">Jurusan</a></li>
-                        <li><a href="#">Panitia</a></li>
-                        <li><a href="#">Calon</a></li>
-                        <li><a href="#">Mahasiswa</a></li>
+                        <li><a href="{{route('data.jurusan')}}" class="{{Request::routeis('data.jurusan')?'active-page':''}}">Jurusan</a></li>
+                        <li><a href="{{route('data.panitia')}}" class="{{Request::routeis('data.panitia')?'active-page':''}}">Panitia</a></li>
+                        <li><a href="{{route('data.calon')}}" class="{{Request::routeis('data.calon')?'active-page':''}}">Calon</a></li>
+                        <li><a href="{{route('data.mahasiswa')}}" class="{{Request::routeis('data.mahasiswa')?'active-page':''}}">Mahasiswa</a></li>
                         
                     </ul>
                 </div>

@@ -6,12 +6,15 @@ use Illuminate\Http\Request;
 use App\Jurusan;
 use App\Panitia;
 use Auth;
+use Validator;
 
 class AdminActionsController extends Controller
 {
     public function addjurusan(Request $request)
     {
-    	
+    	$validator = Validator::make($request->all(), [
+            'fotohimpunan' => 'max:500000',
+        ]);
     	$jurusan = new Jurusan();
         $jurusan->nama_jurusan=$request->nama;
         $file=$request->file('fotohimpunan');
