@@ -118,7 +118,7 @@
                 <td>{{\App\Jurusan::where('id', $dt->id_jurusan)->value('nama_jurusan') }}</td>
                 <td>{{$dt->status}}</td>
                 <td>
-                    <a class="modal-trigger waves-effect waves-light btn blue m-b-xs" href="#modal1"><i class="material-icons">mode_edit</i></a>
+                    <a class="modal-trigger waves-effect waves-light btn blue m-b-xs" href="#modal{{$dt->id}}"><i class="material-icons">mode_edit</i></a>
                     <a class="modal-trigger waves-effect waves-light btn red m-b-xs" href="#"><i class="material-icons">delete</i></a>
                 </td>
             </tr>
@@ -166,5 +166,54 @@ $(document).ready(function() {
     $('#example').DataTable();
 } );
 </script>
+
+@foreach($data as $dt)
+<div id="modal{{$dt->id}}" class="modal modal-fixed-footer" style="height: 1000px;">
+    <div class="modal-content">
+        <form action="{{route('edit.panitia')}}" method="post" class="col s12">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                
+                                                <input name="id" id="id" type="hidden" value="{{$dt->id}}">
+                                                <input name="nama" id="nama" type="text" value="{{$dt->nama}}">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input name="username" id="nama" type="text" value="{{$dt->username}}">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input name="password" id="nama" type="password" placeholder="please insert new password">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                    <div class="input-field col s12">
+                                        <div class="select-wrapper"><span class="caret">▼</span><select name="status" class="initialized">
+                                            <option value="" disabled="" selected="">Choose your option</option>
+                                            
+                                            <option value="active">active</option>
+                                            <option value="disable">disable</option>
+                                            
+                                        </select></div>
+                                        <label>Status</label>
+                                    </div>
+                                    
+                                </div>
+                                        
+                                        
+                                    
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="waves-effect waves-light btn">simpan</button>
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">cancel</a>
+    </div>
+</div></form>
+@endforeach
     </body>
 </html>

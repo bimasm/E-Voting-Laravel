@@ -118,7 +118,7 @@
                 <td>{{$dt->created_at}}</td>
                 <td>{{$dt->updated_at}}</td>
                 <td>
-                    <a class="modal-trigger waves-effect waves-light btn blue m-b-xs" href="#modal1"><i class="material-icons">mode_edit</i></a>
+                    <a class="modal-trigger waves-effect waves-light btn blue m-b-xs" href="#modal{{$dt->id}}"><i class="material-icons">mode_edit</i></a>
                     <a class="modal-trigger waves-effect waves-light btn red m-b-xs" href="#"><i class="material-icons">delete</i></a>
                 </td>
             </tr>
@@ -166,14 +166,55 @@ $(document).ready(function() {
     $('#example').DataTable();
 } );
 </script>
-<div id="modal1" class="modal modal-fixed-footer">
+@foreach($data as $dt)
+<div id="modal{{$dt->id}}" class="modal modal-fixed-footer">
     <div class="modal-content">
-        <h4>Modal Header</h4>
-        <p>A bunch of text</p>
+        <form action="{{route('edit.jurusan')}}" method="post" class="col s12" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input id="nama" name="id" type="hidden" value="{{$dt->id}}">
+                                                <input id="nama" name="nama" type="text" value="{{$dt->nama_jurusan}}">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <div class="file-field input-field">
+                                                <div class="btn teal lighten-1">
+                                                    <span>File</span>
+                                                    <input type="file" name="fotohimpunan">
+                                                </div>
+                                                <div class="file-path-wrapper">
+                                                    <input class="file-path validate" type="text">
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                    <div class="input-field col s12">
+                                        <div class="select-wrapper"><span class="caret">▼</span><select name="status" class="initialized">
+                                            <option value="" disabled="" selected="">Choose your option</option>
+                                            
+                                            <option value="active">active</option>
+                                            <option value="disable">disable</option>
+                                            
+                                        </select></div>
+                                        <label>Status</label>
+                                    </div>
+                                    
+                                </div>
+                                        
+                                        
+                                        
+                                    
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+        <button type="submit" class="waves-effect waves-light btn">simpan</button>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">cancel</a>
     </div>
 </div>
+</form>
+@endforeach
     </body>
 </html>

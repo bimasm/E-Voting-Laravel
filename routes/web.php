@@ -47,6 +47,11 @@ Route::prefix('admin')->group(function () {
 	->middleware('auth:admin');
 	Route::post('inputpanitia', 'AdminActionsController@addpanitia')->name('input.panitia')
 	->middleware('auth:admin');
+	//edit
+	Route::post('editjurusan', 'AdminActionsController@editjurusan')->name('edit.jurusan')
+	->middleware('auth:admin');
+	Route::post('editpanitia', 'AdminActionsController@editpanitia')->name('edit.panitia')
+	->middleware('auth:admin');
 
 });
 

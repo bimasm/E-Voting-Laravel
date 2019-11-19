@@ -44,4 +44,32 @@ class AdminActionsController extends Controller
         return redirect()->route('in.panitia');
 
     }
+    public function editjurusan(Request $request)
+    {
+        $jurusan = Jurusan::find($request->id);
+        $jurusan->nama_jurusan=$request->nama;
+        $file=$request->file('fotohimpunan');
+        if (!$file) {
+            return redirect()->route('in.jurusan')->with('alert','foto harus diisi!');
+        }
+        $file_name=$file->getClientOriginalName();
+        $path=public_path('/img');
+        $file->move($path,$file_name);
+        $jurusan->fotohimpunan='public/img/'.$file_name;
+        $jurusan->status=$request->status;
+        $jurusan->save();
+        return redirect()->route('data.jurusan');
+    }
+    public function editpanitia(Request $request)
+    {
+        $panitia = Panitia::find($request->id);
+       
+        $panitia->username=$request->username;
+        $panitia->nama=$request->nama;
+        $panitia->password=Hash::make($request->password);
+        $panitia->status=$request->status;
+        // dd($panitia);
+        $panitia->save();
+        return redirect()->route('data.panitia');
+    }
 }
