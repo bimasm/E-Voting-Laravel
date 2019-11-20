@@ -84,7 +84,7 @@
                     </div>
                 </nav>
             </header>
-            @extends('admin.menus')
+            @extends('panitia.menus')
             <main class="mn-inner">
                 <div class="row">
                     
@@ -118,8 +118,13 @@
                 <td>{{\App\Jurusan::where('id', $dt->id_jurusan)->value('nama_jurusan') }}</td>
                 <td>{{$dt->status}}</td>
                 <td>
+                    @if($dt->status=='active')
+                    <a class="waves-effect waves-light btn orange m-b-xs" href="{{url('panitia/activatecalon')}}/{{$dt->id}}">disable</a>
+                    @else
+                    <a class="waves-effect waves-light btn orange m-b-xs" href="{{url('panitia/activatecalon')}}/{{$dt->id}}">activate</a>
+                    @endif
                     <a class="modal-trigger waves-effect waves-light btn blue m-b-xs" href="#modal{{$dt->id}}"><i class="material-icons">mode_edit</i></a>
-                    <a class="waves-effect waves-light btn red m-b-xs" href="{{url('admin/hapuscalon')}}/{{$dt->id}}"><i class="material-icons">delete</i></a>
+                    <a class="waves-effect waves-light btn red m-b-xs" href="{{url('panitia/hapuscalon')}}/{{$dt->id}}"><i class="material-icons">delete</i></a>
                 </td>
             </tr>
             @endforeach
@@ -169,7 +174,7 @@ $(document).ready(function() {
 @foreach($data as $dt)
 <div id="modal{{$dt->id}}" class="modal modal-fixed-footer">
     <div class="modal-content">
-        <form action="{{route('edit.calon')}}" method="post" class="col s12" enctype="multipart/form-data">
+        <form action="{{route('editt.calon')}}" method="post" class="col s12" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
                                             <div class="input-field col s12">

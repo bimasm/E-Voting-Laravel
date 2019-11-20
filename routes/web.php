@@ -26,11 +26,15 @@ Route::get('/signout', 'LoginController@signout')->name('signout');
 Route::prefix('admin')->group(function () {
 	Route::get('dashboard', 'AdminController@index')->name('admin.dashboard')
 	->middleware('auth:admin');
+
+
 	//input data
 	Route::get('input/jurusan', 'AdminController@inputjurusan')->name('in.jurusan')
 	->middleware('auth:admin');
 	Route::get('input/panitia', 'AdminController@inputpanita')->name('in.panitia')
 	->middleware('auth:admin');
+
+
 	//show data
 	Route::get('data/jurusan', 'AdminController@datajurusan')->name('data.jurusan')
 	->middleware('auth:admin');
@@ -42,11 +46,13 @@ Route::prefix('admin')->group(function () {
 	->middleware('auth:admin');
 
 
-	//back end
+	//input
 	Route::post('inputjurusan', 'AdminActionsController@addjurusan')->name('input.jurusan')
 	->middleware('auth:admin');
 	Route::post('inputpanitia', 'AdminActionsController@addpanitia')->name('input.panitia')
 	->middleware('auth:admin');
+
+
 	//edit
 	Route::post('editjurusan', 'AdminActionsController@editjurusan')->name('edit.jurusan')
 	->middleware('auth:admin');
@@ -60,6 +66,8 @@ Route::prefix('admin')->group(function () {
 	->middleware('auth:admin');
 	Route::get('statusjurusan/{id}', 'AdminActionsController@statusjurusan')->name('stat.jrs')
 	->middleware('auth:admin');
+
+
 	//delete
 	Route::get('hapusjurusan/{id}', 'AdminActionsController@hapusjurusan')->name('hapus.jurusan')
 	->middleware('auth:admin');
@@ -71,9 +79,40 @@ Route::prefix('admin')->group(function () {
 	->middleware('auth:admin');
 
 });
+
+
 Route::prefix('panitia')->group(function () {
 	Route::get('dashboard', 'PanitiaController@index')->name('panitia.dashboard')
 	->middleware('auth:panitia');
+
+
+	//show data
+	Route::get('data/calon', 'PanitiaController@datacalon')->name('show.calon')
+	->middleware('auth:panitia');
+	Route::get('data/mahasiswa', 'PanitiaController@datamahasiswa')->name('show.mahasiswa')
+	->middleware('auth:panitia');
+
+
+	//input
+	Route::post('inputcalon', 'PanitiaActionsController@addcalon')->name('input.calon')
+	->middleware('auth:panitia');
+	Route::post('inputmahasiswa', 'PanitiaActionsController@addmahasiswa')->name('input.mahasiswa')
+	->middleware('auth:panitia');
+
+
+	//edit
+	Route::get('activate/{id}', 'PanitiaActionsController@activate')->name('activate')
+	->middleware('auth:panitia');
+	Route::get('activatecalon/{id}', 'PanitiaActionsController@activatecalon')->name('activate')
+	->middleware('auth:panitia');
+	Route::post('editcalon', 'PanitiaActionsController@editcalon')->name('editt.calon')
+	->middleware('auth:panitia');
+
+
+	//delete
+	Route::get('hapuscalon/{id}', 'PanitiaActionsController@hapuscalon')->name('del.calon')
+	->middleware('auth:panitia');
+
 });
 
 Route::get('/dashboard', function() {

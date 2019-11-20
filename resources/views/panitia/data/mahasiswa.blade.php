@@ -84,7 +84,7 @@
                     </div>
                 </nav>
             </header>
-            @extends('admin.menus')
+            @extends('panitia.menus')
             <main class="mn-inner">
                 <div class="row">
                     
@@ -120,8 +120,12 @@
                 <td>{{$dt->statuspilih}}</td>
                 <td>{{$dt->status}}</td>
                 <td>
-                    <a class="waves-effect waves-light btn blue m-b-xs" href="{{url('admin/resetmahasiswa')}}/{{$dt->id}}">reset</a>
-                    <a class="waves-effect waves-light btn red m-b-xs" href="{{url('admin/hapusmahasiswa')}}/{{$dt->id}}"><i class="material-icons">delete</i></a>
+                    @if($dt->status=='active')
+                    <a class="waves-effect waves-light btn orange m-b-xs" href="{{url('panitia/activate')}}/{{$dt->id}}">disable</a>
+                    @else
+                    <a class="waves-effect waves-light btn orange m-b-xs" href="{{url('panitia/activate')}}/{{$dt->id}}">activate</a>
+                    @endif
+                    <a class="waves-effect waves-light btn red m-b-xs" href="{{url('panitia/hapusmahasiswa')}}/{{$dt->id}}"><i class="material-icons">delete</i></a>
                 </td>
             </tr>
             @endforeach
