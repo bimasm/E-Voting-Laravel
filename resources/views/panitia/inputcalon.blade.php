@@ -3,7 +3,7 @@
     <head>
         
         <!-- Title -->
-        <title>Panitia Dashboard</title>
+        <title>Admin Dashboard</title>
         
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         <meta charset="UTF-8">
@@ -17,7 +17,7 @@
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="{{asset('plugins/material-preloader/css/materialPreloader.min.css')}}" rel="stylesheet">        
 
-        	
+            
         <!-- Theme Styles -->
         <link href="{{asset('css/alpha.min.css')}}" rel="stylesheet" type="text/css"/>
         <link href="{{asset('css/custom.css')}}" rel="stylesheet" type="text/css"/>
@@ -78,20 +78,44 @@
                             </a>
                         </section>
                         <div class="header-title col s3">      
-                            <span class="chapter-title">{{ config('app.name', 'Dashboard') }} Panitia Dashboard</span>
+                            <span class="chapter-title">{{ config('app.name', 'Dashboard') }} Admin Dashboard</span>
                         </div>                       
                     </div>
                 </nav>
             </header>
-            @extends('panitia.menus')
+            @extends('admin.menus')
             <main class="mn-inner">
                 <div class="row">
-                    <div class="col s12">
+                    <div class="col s6">
                         <div class="card">
                             <div class="card-content">
-                                <span class="card-title">Sistem Informasi</span>
-                                <div>
-                                    <canvas id="presentase" width="500" height="211" style="display: block; width: 400px; height: 111px;padding-bottom: 20px;"></canvas>
+                                <span class="card-title">Tambah Data Jurusan</span>
+                                <div class="row">
+                                    <form action="{{route('input.jurusan')}}" method="post" class="col s12" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input id="nama" name="nama" type="text" >
+                                                <label for="name" class="">Nama Jurusan</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <div class="file-field input-field">
+                                                <div class="btn teal lighten-1">
+                                                    <span>File</span>
+                                                    <input type="file" name="fotohimpunan">
+                                                </div>
+                                                <div class="file-path-wrapper">
+                                                    <input class="file-path validate" type="text">
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <button type="submit" class="waves-effect waves-light btn">tambah</button>
+                                        
+                                    </form>
                                 </div>
                             </div>
                         </div>

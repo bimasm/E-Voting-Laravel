@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Jurusan;
 use App\Panitia;
+use App\Calon;
+use App\Mahasiswa;
 use Auth;
 use Validator;
 
@@ -50,7 +52,7 @@ class AdminActionsController extends Controller
         $jurusan->nama_jurusan=$request->nama;
         $file=$request->file('fotohimpunan');
         if (!$file) {
-            return redirect()->route('in.jurusan')->with('alert','foto harus diisi!');
+            return redirect()->route('data.jurusan')->with('alert','foto harus diisi!');
         }
         $file_name=$file->getClientOriginalName();
         $path=public_path('/img');
@@ -71,5 +73,81 @@ class AdminActionsController extends Controller
         // dd($panitia);
         $panitia->save();
         return redirect()->route('data.panitia');
+    }
+    public function editcalon(Request $request)
+    {
+        $calon = Calon::find($request->id);
+        $calon->nama_ketua=$request->nama_ketua;
+        $calon->nama_wakil=$request->nama_wakil;
+        $calon->deskripsi=$request->deskripsi;
+        $calon->status=$request->status;
+        $file=$request->file('foto');
+        if (!$file) {
+            return redirect()->route('data.calon')->with('alert','foto harus diisi!');
+        }
+        $file_name=$file->getClientOriginalName();
+        $path=public_path('/img');
+        $file->move($path,$file_name);
+        $calon->foto='img/'.$file_name;
+        // dd($calon);
+        $calon->save();
+        return redirect()->route('data.calon');
+    }
+    public function hapusjurusan($id)
+    {
+        $jrs= Jurusan::find($id);
+        $jrs->delete();
+        return redirect()->route('data.jurusan');
+    }
+    public function hapuspanitia($id)
+    {
+        $pnt= Panitia::find($id);
+        $pnt->delete();
+        return redirect()->route('data.panitia');
+    }
+    public function hapuscalon($id)
+    {
+        $pnt= Calon::find($id);
+        $pnt->delete();
+        return redirect()->route('data.calon');
+    }
+    public function hapusmahasiswa($id)
+    {
+        $pnt= Mahasiswa::find($id);
+        $pnt->delete();
+        return redirect()->route('data.mahasiswa');
+    }
+    public function reset($id)
+    {
+        $mhs=Mahasiswa::find($id);
+        $mhs->statuspilih='belum';
+        $mhs->save();
+        return redirect()->route('data.mahasiswa');
+    }
+    public function statuspanitia($id)
+    {
+        $stat=Panitia::where('id', $id)->value('status');
+        $pnt=Panitia::find($id);
+        if ($stat=='active') {
+            $pnt->status='disable';
+        } else {
+            $pnt->status='active';
+        }
+        
+        $pnt->save();
+        return redirect()->route('data.panitia');
+    }
+    public function statusjurusan($id)
+    {
+        $stat=Jurusan::where('id', $id)->value('status');
+        $pnt=Jurusan::find($id);
+        if ($stat=='active') {
+            $pnt->status='disable';
+        } else {
+            $pnt->status='active';
+        }
+        
+        $pnt->save();
+        return redirect()->route('data.jurusan');
     }
 }

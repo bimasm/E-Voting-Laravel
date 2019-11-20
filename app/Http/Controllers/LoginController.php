@@ -22,7 +22,7 @@ class LoginController extends Controller
       
     if (Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password])) {
       return redirect()->intended('/admin/dashboard');
-    } else if (Auth::guard('panitia')->attempt(['username' => $request->username, 'password' => $request->password])) {
+    } else if (Auth::guard('panitia')->attempt(['username' => $request->username, 'password' => $request->password, 'status' => 'active'])) {
       return redirect()->intended('/panitia/dashboard');
     } 
     return redirect('/login');

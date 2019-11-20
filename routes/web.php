@@ -52,12 +52,29 @@ Route::prefix('admin')->group(function () {
 	->middleware('auth:admin');
 	Route::post('editpanitia', 'AdminActionsController@editpanitia')->name('edit.panitia')
 	->middleware('auth:admin');
+	Route::post('editcalon', 'AdminActionsController@editcalon')->name('edit.calon')
+	->middleware('auth:admin');
+	Route::get('resetmahasiswa/{id}', 'AdminActionsController@reset')->name('edit.mhs')
+	->middleware('auth:admin');
+	Route::get('statuspanitia/{id}', 'AdminActionsController@statuspanitia')->name('stat.pnt')
+	->middleware('auth:admin');
+	Route::get('statusjurusan/{id}', 'AdminActionsController@statusjurusan')->name('stat.jrs')
+	->middleware('auth:admin');
+	//delete
+	Route::get('hapusjurusan/{id}', 'AdminActionsController@hapusjurusan')->name('hapus.jurusan')
+	->middleware('auth:admin');
+	Route::get('hapuspanitia/{id}', 'AdminActionsController@hapuspanitia')->name('hapus.panitia')
+	->middleware('auth:admin');
+	Route::get('hapuscalon/{id}', 'AdminActionsController@hapuscalon')->name('hapus.calon')
+	->middleware('auth:admin');
+	Route::get('hapusmahasiswa/{id}', 'AdminActionsController@hapusmahasiswa')->name('hapus.mahasiswa')
+	->middleware('auth:admin');
 
 });
-
-Route::get('/panitia/dashboard', function() {
-  return view('panitia.home');
-})->middleware('auth:panitia');
+Route::prefix('panitia')->group(function () {
+	Route::get('dashboard', 'PanitiaController@index')->name('panitia.dashboard')
+	->middleware('auth:panitia');
+});
 
 Route::get('/dashboard', function() {
   return view('home');
