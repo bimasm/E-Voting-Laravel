@@ -99,7 +99,6 @@
             <tr>
                 <th>No</th>
                 <th>Jurusan</th>
-                <th>Status</th>
                 <th>Create on</th>
                 <th>Update on</th>
                 <th>Action</th>
@@ -114,15 +113,10 @@
             <tr>
                 <td>{{$no++}}</td>
                 <td>{{$dt->nama_jurusan}}</td>
-                <td>{{$dt->status}}</td>
                 <td>{{$dt->created_at}}</td>
                 <td>{{$dt->updated_at}}</td>
                 <td>
-                    @if($dt->status=='active')
-                    <a class="waves-effect waves-light btn orange m-b-xs" href="{{url('admin/statusjurusan')}}/{{$dt->id}}">disable</a>
-                    @else
-                    <a class="waves-effect waves-light btn orange m-b-xs" href="{{url('admin/statusjurusan')}}/{{$dt->id}}">activate</a>
-                    @endif
+                    
                     <a class="modal-trigger waves-effect waves-light btn blue m-b-xs" href="#modal{{$dt->id}}"><i class="material-icons">mode_edit</i></a>
                     <a class="waves-effect waves-light btn red m-b-xs" href="{{url('admin/hapusjurusan')}}/{{$dt->id}}"><i class="material-icons">delete</i></a>
                 </td>
@@ -133,7 +127,7 @@
             <tr>
                 <th>No</th>
                 <th>Jurusan</th>
-                <th>Status</th>
+                
                 <th>Create on</th>
                 <th>Update on</th>
                 <th>Action</th>
@@ -196,19 +190,7 @@ $(document).ready(function() {
                                             </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                    <div class="input-field col s12">
-                                        <div class="select-wrapper"><span class="caret">▼</span><select name="status" class="initialized">
-                                            <option value="" disabled="" selected="">Choose your option</option>
-                                            
-                                            <option value="active">active</option>
-                                            <option value="disable">disable</option>
-                                            
-                                        </select></div>
-                                        <label>Status</label>
-                                    </div>
-                                    
-                                </div>
+                                        
                                         
                                         
                                         

@@ -17,7 +17,6 @@ class CreateJurusanTable extends Migration
             $table->increments('id');
             $table->string('nama_jurusan');
             $table->string('fotohimpunan')->nullable();
-            $table->string('status');
             $table->timestamps();
         });
     }

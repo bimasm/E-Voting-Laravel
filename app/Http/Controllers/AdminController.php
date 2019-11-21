@@ -7,6 +7,7 @@ use App\Jurusan;
 use App\Panitia;
 use App\Calon;
 use App\Mahasiswa;
+use App\History;
 
 
 class AdminController extends Controller
@@ -23,7 +24,7 @@ class AdminController extends Controller
     }
     public function inputpanita()
     {
-        $jurusan=Jurusan::where('status','disable')->get();
+        $jurusan=Jurusan::all();
         return view('admin.inputpanita',compact('jurusan'));
     }
     //show data
@@ -46,5 +47,10 @@ class AdminController extends Controller
     {
         $data=Mahasiswa::all();
         return view('admin.data.mahasiswa', compact('data'));
+    }
+    public function history()
+    {
+        $data=History::all();
+        return view('admin.data.history', compact('data'));
     }
 }

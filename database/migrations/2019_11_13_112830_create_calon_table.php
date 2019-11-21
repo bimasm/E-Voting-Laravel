@@ -22,9 +22,10 @@ class CreateCalonTable extends Migration
             $table->string('nama_ketua');
             $table->string('nama_wakil');
             $table->string('deskripsi');
-            $table->string('status');
             $table->string('foto')->nullable();
             $table->integer('suara');
+            $table->string('status');
+            $table->string('visible');
             $table->timestamps();
         });
     }

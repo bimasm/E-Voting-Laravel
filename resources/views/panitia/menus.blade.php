@@ -18,9 +18,7 @@
                     <a class="waves-effect waves-grey"><i class="material-icons">star_border</i>Starred<span class="new badge">18</span></a>
                 </li> --}}
                 
-                <li class="no-padding">
-                    <a class="waves-effect waves-grey"><i class="material-icons">history</i>History<span class="new grey lighten-1 badge">3 new</span></a>
-                </li>
+                
                 <li class="divider"></li>
                 <li class="no-padding">
                     <a href="{{route('signout')}}" class="waves-effect waves-grey"><i class="material-icons">exit_to_app</i>Sign Out</a>
@@ -41,15 +39,15 @@
                 </div>
             </li>
             
-            <li class="no-padding {{Request::routeis('in.jurusan','in.panitia')?'active':''}}">
-                <a class="collapsible-header waves-effect waves-grey {{Request::routeis('in.jurusan','in.panitia')?'active':''}}"><i class="material-icons">mode_edit</i>Tambah Data<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+            <li class="no-padding {{Request::routeis('insert.calon','insert.mahasiswa')?'active':''}}">
+                <a class="collapsible-header waves-effect waves-grey {{Request::routeis('insert.calon','insert.mahasiswa')?'active':''}}"><i class="material-icons">mode_edit</i>Tambah Data<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                 <div class="collapsible-body">
                     <ul>
-                        <li><a href="{{route('in.jurusan')}}" class="{{Request::routeis('in.jurusan')?'active-page':''}}">Data Jurusan</a></li>
+                        <li><a href="{{route('insert.calon')}}" class="{{Request::routeis('insert.calon')?'active-page':''}}">Data Calon</a></li>
 
 
 
-                        <li><a href="{{route('in.panitia')}}" class="{{Request::routeis('in.panitia')?'active-page':''}}">Data Panitia</a></li>
+                        <li><a href="{{route('insert.mahasiswa')}}" class="{{Request::routeis('insert.mahasiswa')?'active-page':''}}">Data Mahasiswa</a></li>
                     </ul>
                 </div>
             </li>

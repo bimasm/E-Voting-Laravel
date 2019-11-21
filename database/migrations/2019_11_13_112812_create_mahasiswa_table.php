@@ -27,6 +27,7 @@ class CreateMahasiswaTable extends Migration
             ->onUpdate('cascade');
             $table->string('statuspilih');
             $table->string('status');
+            $table->string('visible');
             $table->timestamps();
         });
     }

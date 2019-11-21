@@ -26,6 +26,8 @@ Route::get('/signout', 'LoginController@signout')->name('signout');
 Route::prefix('admin')->group(function () {
 	Route::get('dashboard', 'AdminController@index')->name('admin.dashboard')
 	->middleware('auth:admin');
+	Route::get('history', 'AdminController@history')->name('admin.history')
+	->middleware('auth:admin');
 
 
 	//input data
@@ -92,6 +94,12 @@ Route::prefix('panitia')->group(function () {
 	Route::get('data/mahasiswa', 'PanitiaController@datamahasiswa')->name('show.mahasiswa')
 	->middleware('auth:panitia');
 
+	//input data
+	Route::get('input/calon', 'PanitiaController@inputcalon')->name('insert.calon')
+	->middleware('auth:panitia');
+	Route::get('input/mahasiswa', 'PanitiaController@inputmahasiswa')->name('insert.mahasiswa')
+	->middleware('auth:panitia');
+
 
 	//input
 	Route::post('inputcalon', 'PanitiaActionsController@addcalon')->name('input.calon')
@@ -111,6 +119,8 @@ Route::prefix('panitia')->group(function () {
 
 	//delete
 	Route::get('hapuscalon/{id}', 'PanitiaActionsController@hapuscalon')->name('del.calon')
+	->middleware('auth:panitia');
+	Route::get('hapusmahasiswa/{id}', 'PanitiaActionsController@deletemhs')->name('del.mhs')
 	->middleware('auth:panitia');
 
 });

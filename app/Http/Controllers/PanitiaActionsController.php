@@ -1,45 +1,65 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Mahasiswa;
 use App\Calon;
+use App\History;
+use Validator;
+use Auth;
 
 class PanitiaActionsController extends Controller
 {
     public function addcalon(Request $request)
     {
+        $jurusan=Auth::guard('panitia')->user()->id_jurusan;
     	$validator = Validator::make($request->all(), [
             'fotohimpunan' => 'max:500000',
         ]);
-    	$calon = new Jurusan();
-        $calon->nama_jurusan=$request->nama;
-        $file=$request->file('fotohimpunan');
+    	$calon = new Calon();
+        $calon->nama_ketua=$request->namak;
+        $calon->nama_wakil=$request->namaw;
+        $calon->deskripsi=$request->deskripsi;
+        $file=$request->file('foto');
         if (!$file) {
-            return redirect()->route('in.jurusan')->with('alert','foto harus diisi!');
+            return redirect()->route('insert.calon')->with('alert','foto harus diisi!');
         }
         $file_name=$file->getClientOriginalName();
         $path=public_path('/img');
         $file->move($path,$file_name);
-        $calon->fotohimpunan='public/img/'.$file_name;
+        $calon->foto='img/'.$file_name;
         $calon->status='disable';
+        $calon->visible='true';
+        $calon->suara=0;
+        $calon->id_jurusan=$jurusan;
         // dd($jurusan);
         $calon->save();
     	
         
-        return redirect()->route('in.jurusan');
+        return redirect()->route('insert.calon');
     }
-    public function addpanitia(Request $request)
+    public function addmahasiswa(Request $request)
     {
-        $panitia = new Panitia();
-        $panitia->id_jurusan=$request->id_jurusan;
-        $panitia->username=$request->username;
-        $panitia->nama=$request->nama;
-        $panitia->password=Hash::make($request->password);
-        $panitia->status='disable';
-        $panitia->save();
-        return redirect()->route('in.panitia');
+        $jurusan=Auth::guard('panitia')->user()->id_jurusan;
+        $panitia=Auth::guard('panitia')->user()->id;
+        $namapnt=Auth::guard('panitia')->user()->nama;
+        $mhs = new Mahasiswa();
+        $mhs->id_jurusan=$jurusan;
+        $mhs->nim=$request->nim;
+        $mhs->password=Hash::make('mhs');
+        $mhs->id_panitia=$panitia;
+        $mhs->statuspilih='belum';
+        $mhs->status='disable';
+        $mhs->visible='true';
+        $mhs->save();
+        $hs=new History();
+        $hs->nama=$namapnt;
+        $hs->aksi='create';
+        $hs->kepada=$request->nim;
+        $hs->save();
+
+        return redirect()->route('insert.mahasiswa');
 
     }
     public function activate($id)
@@ -92,5 +112,20 @@ class PanitiaActionsController extends Controller
         // dd($calon);
         $calon->save();
         return redirect()->route('show.calon');
+    }
+    public function deletemhs($id)
+    {
+        $namapnt=Auth::guard('panitia')->user()->nama;
+        $nim=Mahasiswa::where('id', $id)->value('nim');
+        $mhs=Mahasiswa::find($id);
+        $mhs->visible='false';
+        $mhs->save();
+        $hs=new History();
+        $hs->nama=$namapnt;
+        $hs->aksi='delete';
+        $hs->kepada=$nim;
+        $hs->save();
+        return redirect()->route('show.mahasiswa');
+
     }
 }

@@ -23,8 +23,16 @@ class PanitiaController extends Controller
     public function datamahasiswa()
     {
     	$jurusan=Auth::guard('panitia')->user()->id_jurusan;
-    	$data=Mahasiswa::where('id_jurusan', $jurusan)->get();
+    	$data=Mahasiswa::where('id_jurusan', $jurusan)->where('visible', 'true')->get();
     	
         return view('panitia.data.mahasiswa',compact('data'));
+    }
+    public function inputcalon()
+    {
+        return view('panitia.inputcalon');
+    }
+    public function inputmahasiswa()
+    {
+        return view('panitia.inputmahasiswa');
     }
 }

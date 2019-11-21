@@ -83,28 +83,40 @@
                     </div>
                 </nav>
             </header>
-            @extends('admin.menus')
+            @extends('panitia.menus')
             <main class="mn-inner">
                 <div class="row">
                     <div class="col s6">
                         <div class="card">
                             <div class="card-content">
-                                <span class="card-title">Tambah Data Jurusan</span>
+                                <span class="card-title">Tambah Data Calon</span>
                                 <div class="row">
-                                    <form action="{{route('input.jurusan')}}" method="post" class="col s12" enctype="multipart/form-data">
+                                    <form action="{{route('input.calon')}}" method="post" class="col s12" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <input id="nama" name="nama" type="text" >
-                                                <label for="name" class="">Nama Jurusan</label>
+                                                <input id="nama" name="namak" type="text" >
+                                                <label for="name" class="">Nama Ketua</label>
                                             </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input id="nama" name="namaw" type="text" >
+                                                <label for="name" class="">Nama Wakil</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <textarea name="deskripsi" id="textarea1" class="materialize-textarea" length="120"></textarea>
+                                                <label for="textarea1" class="">Deskripsi</label>
+                                            <span class="character-counter" style="float: right; font-size: 12px; height: 1px;"></span></div>
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
                                                 <div class="file-field input-field">
                                                 <div class="btn teal lighten-1">
                                                     <span>File</span>
-                                                    <input type="file" name="fotohimpunan">
+                                                    <input type="file" name="foto">
                                                 </div>
                                                 <div class="file-path-wrapper">
                                                     <input class="file-path validate" type="text">
@@ -112,6 +124,7 @@
                                             </div>
                                             </div>
                                         </div>
+                                        
                                         
                                         <button type="submit" class="waves-effect waves-light btn">tambah</button>
                                         

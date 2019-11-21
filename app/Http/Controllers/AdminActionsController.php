@@ -27,7 +27,6 @@ class AdminActionsController extends Controller
         $path=public_path('/img');
         $file->move($path,$file_name);
         $jurusan->fotohimpunan='public/img/'.$file_name;
-        $jurusan->status='disable';
         // dd($jurusan);
         $jurusan->save();
     	
@@ -58,7 +57,6 @@ class AdminActionsController extends Controller
         $path=public_path('/img');
         $file->move($path,$file_name);
         $jurusan->fotohimpunan='public/img/'.$file_name;
-        $jurusan->status=$request->status;
         $jurusan->save();
         return redirect()->route('data.jurusan');
     }
@@ -121,6 +119,7 @@ class AdminActionsController extends Controller
     {
         $mhs=Mahasiswa::find($id);
         $mhs->statuspilih='belum';
+        $mhs->visible='true';
         $mhs->save();
         return redirect()->route('data.mahasiswa');
     }
@@ -137,17 +136,5 @@ class AdminActionsController extends Controller
         $pnt->save();
         return redirect()->route('data.panitia');
     }
-    public function statusjurusan($id)
-    {
-        $stat=Jurusan::where('id', $id)->value('status');
-        $pnt=Jurusan::find($id);
-        if ($stat=='active') {
-            $pnt->status='disable';
-        } else {
-            $pnt->status='active';
-        }
-        
-        $pnt->save();
-        return redirect()->route('data.jurusan');
-    }
+    
 }

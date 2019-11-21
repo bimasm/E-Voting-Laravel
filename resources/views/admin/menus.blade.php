@@ -19,7 +19,7 @@
                 </li> --}}
                 
                 <li class="no-padding">
-                    <a class="waves-effect waves-grey"><i class="material-icons">history</i>History<span class="new grey lighten-1 badge">3 new</span></a>
+                    <a href="{{route('admin.history')}}" class="waves-effect waves-grey"><i class="material-icons">history</i>History</a>
                 </li>
                 <li class="divider"></li>
                 <li class="no-padding">
@@ -47,7 +47,7 @@
                     <ul>
                         
                         @php
-                        $jurusan=\App\Jurusan::where('status', 'disable')->get(); 
+                        $jurusan=\App\Jurusan::all(); 
                         @endphp
                         @foreach($jurusan as $jr)
                         <li><a href="#">{{ $jr->nama_jurusan }}</a></li>

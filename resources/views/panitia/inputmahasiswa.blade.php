@@ -83,7 +83,7 @@
                     </div>
                 </nav>
             </header>
-            @extends('admin.menus')
+            @extends('panitia.menus')
             <main class="mn-inner">
                 <div class="row">
                     <div class="col s6">
@@ -91,39 +91,17 @@
                             <div class="card-content">
                                 <span class="card-title">Tambah Data Panitia</span>
                                 <div class="row">
-                                    <form action="{{route('input.panitia')}}" method="post" class="col s12">
+                                    <form action="{{route('input.mahasiswa')}}" method="post" class="col s12">
                                         @csrf
+                                        
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <input name="nama" id="nama" type="text" >
-                                                <label for="name" class="">Nama Panitia</label>
+                                                <input name="nim" id="nama" type="text" >
+                                                <label for="name" class="">NIM</label>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="input-field col s12">
-                                                <input name="username" id="nama" type="text" >
-                                                <label for="name" class="">Username</label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="input-field col s12">
-                                                <input name="password" id="nama" type="password" >
-                                                <label for="name" class="">Password</label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                    <div class="input-field col s12">
-                                        <div class="select-wrapper"><span class="caret">▼</span><select name="id_jurusan" class="initialized">
-                                            <option value="" disabled="" selected="">Choose your option</option>
-                                            @foreach($jurusan as $jr)
-                                            <option value="{{$jr->id}}">{{$jr->nama_jurusan}}</option>
-                                            @endforeach
-                                            
-                                        </select></div>
-                                        <label>Pilih Jurusan</label>
-                                    </div>
-                                    
-                                </div>
+                                        
+                                        
                                         <button type="submit" class="waves-effect waves-light btn">tambah</button>
                                         
                                     </form>

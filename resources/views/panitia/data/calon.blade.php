@@ -124,7 +124,7 @@
                     <a class="waves-effect waves-light btn orange m-b-xs" href="{{url('panitia/activatecalon')}}/{{$dt->id}}">activate</a>
                     @endif
                     <a class="modal-trigger waves-effect waves-light btn blue m-b-xs" href="#modal{{$dt->id}}"><i class="material-icons">mode_edit</i></a>
-                    <a class="waves-effect waves-light btn red m-b-xs" href="{{url('panitia/hapuscalon')}}/{{$dt->id}}"><i class="material-icons">delete</i></a>
+                   
                 </td>
             </tr>
             @endforeach
