@@ -37,7 +37,7 @@ class LoginController extends Controller
       'password' => 'required'
     ]);
       
-    if (Auth::guard('mahasiswa')->attempt(['nim' => $request->nim, 'password' => $request->password])) {
+    if (Auth::guard('mahasiswa')->attempt(['nim' => $request->nim, 'password' => $request->password, 'status' => 'active'])) {
       return redirect()->intended('/dashboard');
     }
     return redirect('/');

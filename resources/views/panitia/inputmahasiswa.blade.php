@@ -3,7 +3,7 @@
     <head>
         
         <!-- Title -->
-        <title>Admin Dashboard</title>
+        <title>Panitia Dashboard</title>
         
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         <meta charset="UTF-8">
@@ -89,7 +89,7 @@
                     <div class="col s6">
                         <div class="card">
                             <div class="card-content">
-                                <span class="card-title">Tambah Data Panitia</span>
+                                <span class="card-title">Tambah Data Mahasiswa</span>
                                 <div class="row">
                                     <form action="{{route('input.mahasiswa')}}" method="post" class="col s12">
                                         @csrf

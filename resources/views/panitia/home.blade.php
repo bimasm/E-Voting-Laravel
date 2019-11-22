@@ -17,7 +17,7 @@
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="{{asset('plugins/material-preloader/css/materialPreloader.min.css')}}" rel="stylesheet">        
 
-        	
+            
         <!-- Theme Styles -->
         <link href="{{asset('css/alpha.min.css')}}" rel="stylesheet" type="text/css"/>
         <link href="{{asset('css/custom.css')}}" rel="stylesheet" type="text/css"/>
@@ -89,7 +89,7 @@
                     <div class="col s12">
                         <div class="card">
                             <div class="card-content">
-                                <span class="card-title">Sistem Informasi</span>
+                                <span class="card-title">{{$namajurusan}}</span>
                                 <div>
                                     <canvas id="presentase" width="500" height="211" style="display: block; width: 400px; height: 111px;padding-bottom: 20px;"></canvas>
                                 </div>
@@ -129,11 +129,20 @@
 new Chart(document.getElementById("presentase"), {
     type: 'pie',
     data: {
-      labels: ["Pasangan Calon 01", "Pasangan Calon 02", "Belum Memilih"],
+      labels: [
+            @foreach($data as $dt)
+                "{{$dt->nama_ketua}}",
+            @endforeach 
+      "Belum Memilih"],
       datasets: [{
         label: "pemilih",
         backgroundColor: ["#3e95cd", "#8e5ea2", "#c45850"],
-        data: [2478,5267,433]
+        data: [
+            @foreach($data as $dt)
+                {{$dt->suara}},
+            @endforeach
+            {{ $belum }}
+        ]
       }]
     },
     options: {

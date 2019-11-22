@@ -86,14 +86,22 @@
             @extends('admin.menus')
             <main class="mn-inner">
                 <div class="row">
-                    <div class="col s12">
-                        <div class="card">
-                            <div class="card-content">
-                                <span class="card-title">Sistem Informasi</span>
-                                <div>
-                                    <canvas id="presentase" width="500" height="211" style="display: block; width: 400px; height: 111px;padding-bottom: 20px;"></canvas>
-                                </div>
-                            </div>
+                    <div class="col s12 m4">
+                    <div class="card-panel light-blue lighten-3 center-align">
+                        <span class="card-title" style="color: #fff;font-size: 22px;">Jurusan</span>
+                            <p class="white-text" style="font-size: 50px;"><b>{{$jurusan}}</b></p>
+                        </div>
+                    </div>
+                    <div class="col s12 m4">
+                        <div class="card-panel blue-grey lighten-1 center-align">
+                            <span class="card-title" style="color: #fff;font-size: 22px;">Calon</span>
+                            <p class="white-text" style="font-size: 50px;"><b>{{$calon}}</b></p>
+                        </div>
+                    </div>
+                    <div class="col s12 m4">
+                        <div class="card-panel teal darken-3 center-align">
+                            <span class="card-title" style="color: #fff;font-size: 22px;">Mahasiswa</span>
+                            <p class="white-text" style="font-size: 50px;"><b>{{$mahasiswa}}</b></p>
                         </div>
                     </div>
                 </div>
@@ -133,7 +141,7 @@ new Chart(document.getElementById("presentase"), {
       datasets: [{
         label: "pemilih",
         backgroundColor: ["#3e95cd", "#8e5ea2", "#c45850"],
-        data: [2478,5267,433]
+        data: [1,6,3]
       }]
     },
     options: {

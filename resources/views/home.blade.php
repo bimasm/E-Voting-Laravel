@@ -106,41 +106,48 @@
                     </div>
                 
                 <div class="footer">
-                    <p class="copyright">Steelcoders ©</p>
-                    <a href="#!">Privacy</a> &amp; <a href="#!">Terms</a>
+                    <p class="copyright">StupidCode ©</p>
+                    
                 </div>
                 </div>
             </aside>
             <main class="mn-inner">
                 <div class="row">
+                    @if(Auth::guard('mahasiswa')->user()->statuspilih=='belum')
+                        @foreach($data as $dt)
                 <div class="col s6">
                     <div class="card large">
                             <div class="card-image">
-                                <img src="{{asset('images/paslon1.jpg')}}" alt="">
-                                <span class="card-title">nama ketua & nama wakil</span>
+                                <img src="{{$dt->foto}}" alt="">
+                                
                             </div>
                             <div class="card-content">
-                                <p>slogan tim suksesnya cok</p>
+                                <span class="card-title" style="font-size: 20px; color: #000">{{$dt->nama_ketua}} & {{$dt->nama_wakil}}</span>
+                                <p>{{$dt->deskripsi}}</p>
                             </div>
                             <div class="card-action">
-                                <button style="width: 100%;" type="submit" onclick="pilih()" class="waves-effect waves-light btn blue m-b-xs sweetalert-cancel">Pilih</button>
+                                <form action="{{route('pilih.calon')}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="id_calon" value="{{$dt->id}}">
+                                    <input type="hidden" name="id" value="{{ Auth::guard('mahasiswa')->user()->id }}">
+                                    <button style="width: 100%;" type="submit" onclick="archiveFunction()" class="waves-effect waves-light btn blue m-b-xs sweetalert-cancel">Pilih</button>
+                                </form>
                             </div>
                         </div>
                 </div>
-                <div class="col s6">
-                    <div class="card large">
-                            <div class="card-image">
-                                <img src="{{asset('images/paslon2.jpg')}}" alt="">
-                                <span class="card-title">nama ketua & nama wakil</span>
-                            </div>
+                @endforeach
+                    @else
+                        <div class="col s12">
+                        <div class="card">
                             <div class="card-content">
-                                <p>slogan tim suksesnya cok</p>
-                            </div>
-                            <div class="card-action">
-                                <button style="width: 100%;" type="submit" onclick="pilih()" class="waves-effect waves-light btn blue m-b-xs sweetalert-cancel">Pilih</button>
+                                <span class="card-title">{{$namajurusan}}</span>
+                                <div>
+                                    <canvas id="presentase" width="500" height="211" style="display: block; width: 400px; height: 111px;padding-bottom: 20px;"></canvas>
+                                </div>
                             </div>
                         </div>
-                </div>
+                    </div>
+                    @endif
                 </div>
             </main>
             
@@ -155,9 +162,13 @@
         <script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}"></script>
         <script src="{{asset('js/alpha.min.js')}}"></script>
         <script src="{{asset('js/pages/miscellaneous-sweetalert.js')}}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+        
         <script>
-            function pilih(){
-                swal({   
+            function archiveFunction() {
+                event.preventDefault(); // prevent form submit
+                var form = event.target.form; // storing the form
+                        swal({
                         title: "Are you sure?",
                         text: "You will not be able to select again!",
                         type: "warning",
@@ -168,15 +179,44 @@
                         cancelButtonText: "No, cancel",
                         closeOnConfirm: false,
                         closeOnCancel: false 
-                        }, function(isConfirm){
-                        if (isConfirm) {
-                            swal("Selected!", "Your vote is recorded.", "success");
-                            window.setTimeout(function(){ window.location = "/logout"; },4000);
-                        } else {
-                            swal("Cancelled", "Your vote has been cancelled", "error");
-                        }
-                    })
+                },
+                function(isConfirm){
+                  if (isConfirm) {
+                    swal("Selected!", "Your vote is recorded.", "success");
+                    form.submit();          // submitting the form when user press yes
+                  } else {
+                    swal("Cancelled", "Your imaginary file is safe :)", "error");
+                  }
+                });
             }
         </script>
+        <script>
+new Chart(document.getElementById("presentase"), {
+    type: 'pie',
+    data: {
+      labels: [
+            @foreach($data as $dt)
+                "{{$dt->nama_ketua}}",
+            @endforeach 
+      "Belum Memilih"],
+      datasets: [{
+        label: "pemilih",
+        backgroundColor: ["#3e95cd", "#8e5ea2", "#c45850"],
+        data: [
+            @foreach($data as $dt)
+                {{$dt->suara}},
+            @endforeach
+            {{ $belum }}
+        ]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Hasil Pemilihan Sementara'
+      }
+    }
+});
+</script>
     </body>
 </html>

@@ -5,13 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Calon;
 use App\Mahasiswa;
+use App\Jurusan;
 use Auth;
-
+ 
 class PanitiaController extends Controller
 {
     public function index()
     {
-        return view('panitia.home');
+        $jurusan=Auth::guard('panitia')->user()->id_jurusan;
+        $namajurusan=Jurusan::where('id',$jurusan)->value('nama_jurusan');
+        $data=Calon::where('id_jurusan', $jurusan)->where('status', 'active')->get();
+        $belum=Mahasiswa::where('statuspilih', 'belum')->where('id_jurusan',$jurusan)->count();
+        return view('panitia.home',compact('data','belum','namajurusan'));
     }
     public function datacalon()
     {

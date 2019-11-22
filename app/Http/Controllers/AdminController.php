@@ -14,8 +14,10 @@ class AdminController extends Controller
 {
     public function index()
     {
-    	
-        return view('admin.home');
+    	$jurusan=Jurusan::all()->count();
+        $calon=Calon::all()->count();
+        $mahasiswa=Mahasiswa::all()->count();
+        return view('admin.home', compact('jurusan','calon','mahasiswa'));
     }
     //input data
     public function inputjurusan()
@@ -52,5 +54,12 @@ class AdminController extends Controller
     {
         $data=History::all();
         return view('admin.data.history', compact('data'));
+    }
+    public function chart($id)
+    {
+        $data=Calon::where('id_jurusan', $id)->where('status', 'active')->get();
+        $belum=Mahasiswa::where('statuspilih', 'belum')->count();
+        $jurusan=Jurusan::where('id',$id)->value('nama_jurusan');
+        return view('admin.chart', compact('data','belum','jurusan'));
     }
 }

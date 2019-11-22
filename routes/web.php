@@ -68,7 +68,7 @@ Route::prefix('admin')->group(function () {
 	->middleware('auth:admin');
 	Route::get('statusjurusan/{id}', 'AdminActionsController@statusjurusan')->name('stat.jrs')
 	->middleware('auth:admin');
-
+	
 
 	//delete
 	Route::get('hapusjurusan/{id}', 'AdminActionsController@hapusjurusan')->name('hapus.jurusan')
@@ -78,6 +78,8 @@ Route::prefix('admin')->group(function () {
 	Route::get('hapuscalon/{id}', 'AdminActionsController@hapuscalon')->name('hapus.calon')
 	->middleware('auth:admin');
 	Route::get('hapusmahasiswa/{id}', 'AdminActionsController@hapusmahasiswa')->name('hapus.mahasiswa')
+	->middleware('auth:admin');
+	Route::get('hasil/{id}', 'AdminController@chart')->name('hasil.pemilihan')
 	->middleware('auth:admin');
 
 });
@@ -125,7 +127,11 @@ Route::prefix('panitia')->group(function () {
 
 });
 
-Route::get('/dashboard', function() {
-  return view('home');
-})->middleware('auth:mahasiswa');
+Route::prefix('/')->group(function () {
+	Route::get('dashboard', 'HomeController@index')->name('mahasiswa.dashboard')
+	->middleware('auth:mahasiswa');
 
+	Route::post('pilih', 'MahasiswaActionsController@pilih')->name('pilih.calon')
+	->middleware('auth:mahasiswa');
+
+});

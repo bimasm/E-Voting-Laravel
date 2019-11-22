@@ -3,7 +3,7 @@
     <head>
         
         <!-- Title -->
-        <title>Panitia Dashboard</title>
+        <title>Admin Dashboard</title>
         
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         <meta charset="UTF-8">
@@ -15,10 +15,9 @@
         
         <link type="text/css" rel="stylesheet" href="{{asset('plugins/materialize/css/materialize.min.css')}}"/>
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="{{asset('plugins/material-preloader/css/materialPreloader.min.css')}}" rel="stylesheet">
-        <link href="{{asset('plugins/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
+        <link href="{{asset('plugins/material-preloader/css/materialPreloader.min.css')}}" rel="stylesheet">        
 
-            
+        	
         <!-- Theme Styles -->
         <link href="{{asset('css/alpha.min.css')}}" rel="stylesheet" type="text/css"/>
         <link href="{{asset('css/custom.css')}}" rel="stylesheet" type="text/css"/>
@@ -79,69 +78,21 @@
                             </a>
                         </section>
                         <div class="header-title col s3">      
-                            <span class="chapter-title">{{ config('app.name', 'Dashboard') }} Admin Dashboard</span>
+                            <span class="chapter-title">{{ config('app.name', 'Dashboard') }} Panitia Dashboard</span>
                         </div>                       
                     </div>
                 </nav>
             </header>
-            @extends('panitia.menus')
+            @extends('admin.menus')
             <main class="mn-inner">
                 <div class="row">
-                    
-                    <div class="col s12 m12 l12">
+                    <div class="col s12">
                         <div class="card">
                             <div class="card-content">
-                                <span class="card-title">Data Mahasiswa</span>
-                                
-                                
-                                <table id="example" class="display" style="width:100%">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Nim</th>
-                <th>Jurusan</th>
-                <th>Create by</th>
-                <th>Status pilih</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @php
-            $no=1;
-            @endphp
-            @foreach($data as $dt)
-            
-            <tr>
-                <td>{{$no++}}</td>
-                <td>{{$dt->nim}}</td>
-                <td>{{\App\Jurusan::where('id', $dt->id_jurusan)->value('nama_jurusan') }}</td>
-                <td>{{\App\Panitia::where('id', $dt->id_panitia)->value('username') }}</td>
-                <td>{{$dt->statuspilih}}</td>
-                <td>{{$dt->status}}</td>
-                <td>
-                    @if($dt->status=='active')
-                    <a class="waves-effect waves-light btn orange m-b-xs" href="{{url('panitia/activate')}}/{{$dt->id}}">disable</a>
-                    @else
-                    <a class="waves-effect waves-light btn orange m-b-xs" href="{{url('panitia/activate')}}/{{$dt->id}}">activate</a>
-                    @endif
-                    <a class="waves-effect waves-light btn red m-b-xs" href="{{url('panitia/hapusmahasiswa')}}/{{$dt->id}}"><i class="material-icons">delete</i></a>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-        <tfoot>
-            <tr>
-                <th>No</th>
-                <th>Nim</th>
-                <th>Jurusan</th>
-                <th>Create by</th>
-                <th>Status pilih</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </tfoot>
-    </table>
+                                <span class="card-title">{{$jurusan}}</span>
+                                <div>
+                                    <canvas id="presentase" width="500" height="211" style="display: block; width: 400px; height: 111px;padding-bottom: 20px;"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -156,22 +107,51 @@
         <script src="{{asset('plugins/materialize/js/materialize.min.js')}}"></script>
         <script src="{{asset('plugins/material-preloader/js/materialPreloader.min.js')}}"></script>
         <script src="{{asset('plugins/jquery-blockui/jquery.blockui.js')}}"></script>
-        <script src="{{asset('plugins/datatables/js/jquery.dataTables.min.js')}}"></script>
-        
-        <script src="{{asset('js/pages/table-data.js')}}"></script>
         <script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}"></script>
         <script src="{{asset('js/alpha.min.js')}}"></script>
         <script src="{{asset('js/pages/miscellaneous-sweetalert.js')}}"></script>
 
         
-        
+        <script src="{{asset('plugins/chart.js/chart.min.js')}}"></script>
+        <script src="{{asset('plugins/d3/d3.min.js')}}"></script>
+        <script src="{{asset('plugins/nvd3/nv.d3.min.js')}}"></script>
+        <script src="{{asset('plugins/flot/jquery.flot.min.js')}}"></script>
+        <script src="{{asset('plugins/flot/jquery.flot.time.min.js')}}"></script>
+        <script src="{{asset('plugins/flot/jquery.flot.symbol.min.js')}}"></script>
+        <script src="{{asset('plugins/flot/jquery.flot.resize.min.js')}}"></script>
+        <script src="{{asset('plugins/flot/jquery.flot.tooltip.min.js')}}"></script>
+        <script src="{{asset('plugins/flot/jquery.flot.pie.min.js')}}"></script>
+        <script src="{{asset('plugins/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
         
         
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
         <script>
-$(document).ready(function() {
-    $('#example').DataTable();
-} );
+new Chart(document.getElementById("presentase"), {
+    type: 'pie',
+    data: {
+      labels: [
+            @foreach($data as $dt)
+                "{{$dt->nama_ketua}}",
+            @endforeach 
+      "Belum Memilih"],
+      datasets: [{
+        label: "pemilih",
+        backgroundColor: ["#3e95cd", "#8e5ea2", "#c45850"],
+        data: [
+            @foreach($data as $dt)
+                {{$dt->suara}},
+            @endforeach
+            {{ $belum }}
+        ]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Hasil Pemilihan Sementara'
+      }
+    }
+});
 </script>
     </body>
 </html>

@@ -50,7 +50,7 @@
                         $jurusan=\App\Jurusan::all(); 
                         @endphp
                         @foreach($jurusan as $jr)
-                        <li><a href="#">{{ $jr->nama_jurusan }}</a></li>
+                        <li><a href="../hasil/{{$jr->id}}">{{ $jr->nama_jurusan }}</a></li>
                         @endforeach
                         
                     </ul>
@@ -73,8 +73,7 @@
             
         </ul>
         <div class="footer">
-            <p class="copyright">Steelcoders ©</p>
-            <a href="#!">Privacy</a> &amp; <a href="#!">Terms</a>
+            <p class="copyright">StupidCode ©</p>
         </div>
     </div>
 </aside>

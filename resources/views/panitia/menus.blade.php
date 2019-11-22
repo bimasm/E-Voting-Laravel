@@ -56,8 +56,8 @@
             
         </ul>
         <div class="footer">
-            <p class="copyright">Steelcoders ©</p>
-            <a href="#!">Privacy</a> &amp; <a href="#!">Terms</a>
+            <p class="copyright">StupidCode ©</p>
+            
         </div>
     </div>
 </aside>
